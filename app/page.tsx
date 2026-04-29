@@ -26,31 +26,27 @@ const beforeAfterData: BeforeAfter[] = [
   {
     id: 1,
     label: "Full Interior Restoration",
-    before:
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-    after:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
+    before: "/images/before-after/audiinterior-before.jpg",
+    after: "/images/before-after/audiinterior-after.jpg",
     description: "Deep-cleaned seats, sanitized surfaces, and restored trim.",
   },
   {
     id: 2,
     label: "Paint Correction & Ceramic Coat",
-    before:
-      "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=600&q=80",
-    after:
-      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80",
+    before: "/images/before-after/rangerover-before.jpg",
+    after: "/images/before-after/rangerover-after.jpg",
     description:
       "Multi-stage polish removed swirls; ceramic coat locked in the gloss.",
   },
-  {
-    id: 3,
-    label: "Wheel & Engine Bay Detail",
-    before:
-      "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&q=80",
-    after:
-      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80",
-    description: "Degreased, cleaned, and protected every component.",
-  },
+  // {
+  //   id: 3,
+  //   label: "Wheel & Engine Bay Detail",
+  //   before:
+  //     "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&q=80",
+  //   after:
+  //     "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80",
+  //   description: "Degreased, cleaned, and protected every component.",
+  // },
 ];
 
 const services = [
@@ -186,6 +182,10 @@ export default function Home() {
           opacity: .5;
         }
 
+        .gold {
+          color: var(--gold);
+        }
+
         /* ── Nav ── */
         .nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -225,7 +225,7 @@ export default function Home() {
           position: absolute; inset: 0;
           background:
             linear-gradient(to bottom, rgba(10,10,10,.2) 0%, rgba(10,10,10,.85) 70%, var(--black) 100%),
-            url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1600&q=90') center/cover no-repeat;
+            url('/images/hero.jpg') center/cover no-repeat;
         }
         .hero-content { position: relative; max-width: 760px; }
         .hero-badge {
@@ -562,6 +562,7 @@ export default function Home() {
           .form-group.full { grid-column: 1; }
           footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
         }
+          
       `}</style>
 
       {/* ── Nav ── */}
@@ -614,7 +615,7 @@ export default function Home() {
             <a href="#quote" className="btn-primary">
               Request a Quote
             </a>
-            <a href="#work" className="btn-outline">
+            <a href="#portfolio" className="btn-outline">
               See Our Work
             </a>
           </div>
@@ -624,10 +625,10 @@ export default function Home() {
       {/* ── Stats strip ── */}
       <div className="stats">
         {[
-          { num: "200+", label: "Vehicles Detailed" },
+          { num: "FOUNDER LED", label: "Every Job Personally Handled" },
           { num: "5★", label: "Average Rating" },
           { num: "100%", label: "Satisfaction Guaranteed" },
-          { num: "3 yrs", label: "Experience" },
+          { num: "Local Business", label: "Using Professional Equipment" },
         ].map((s) => (
           <div key={s.label}>
             <span className="stat-num">{s.num}</span>
@@ -654,7 +655,7 @@ export default function Home() {
         <div className="about-inner">
           <div className="about-img-wrap">
             <Image
-              src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=700&q=80"
+              src="/images/profile.jpg"
               alt="DJ — founder of DJ's Detailing"
               className="about-img"
               height={2000}
@@ -662,9 +663,9 @@ export default function Home() {
             />
           </div>
           <div className="about-text">
-            <span className="section-label">The Man Behind the Machine</span>
+            <span className="section-label">About</span>
             <h2 className="section-title" style={{ marginBottom: 28 }}>
-              Meet DJ
+              Meet <span className="gold">DJ</span>
             </h2>
             <blockquote className="about-quote">
               &quot;A clean car isn &apos;t just about looks — it&apos;s about
@@ -672,11 +673,15 @@ export default function Home() {
               they open the door.&quot;
             </blockquote>
             <p className="about-body">
-              DJ grew up restoring classic cars in his father&apos;s garage,
-              where he learned that the difference between good and great is
-              patience and product knowledge. After years of detailing for
-              friends and family who couldn&apos;t stop raving about his work,
-              he turned that passion into a full-time craft.
+              DJ, a.k.a. <span className="gold">Dillan J. Akinc</span>, is a
+              resident of Needham, MA and is a recent graduate of the Roxbury
+              Latin School. Next year, he is committed to play Varsity Soccer at
+              Union College. Dillan grew up restoring classic cars in his
+              father&apos;s garage, where he learned that the difference between
+              good and great is patience and product knowledge. After gaining
+              experience by detailing for friends and family who couldn&apos;t
+              stop raving about his work, he turned that passion into a
+              full-time craft.
             </p>
             <p className="about-body">
               Today, DJ&apos;s Detailing brings that same hands-on obsession to
@@ -697,6 +702,7 @@ export default function Home() {
                 "Mobile & Flexible",
                 "Transparent Pricing",
                 "Paint-Safe Processes",
+                "Fast Responses & Free Consults",
               ].map((v) => (
                 <span key={v} className="value-chip">
                   {v}
@@ -711,8 +717,8 @@ export default function Home() {
 
       {/* ── Services ── */}
       <section id="services">
-        <span className="section-label">What We Offer</span>
-        <h2 className="section-title">Services</h2>
+        <span className="section-label">Services</span>
+        <h2 className="section-title">What We Offer</h2>
         <div className="services-grid">
           {[
             {
@@ -762,7 +768,7 @@ export default function Home() {
         <div className="contact-inner">
           {/* Info side */}
           <div className="contact-info">
-            <span className="section-label">Get In Touch</span>
+            <span className="section-label">Contact Us</span>
             <h2 className="section-title" style={{ marginBottom: 40 }}>
               Let&apos;s Talk
               <br />
@@ -770,7 +776,7 @@ export default function Home() {
             </h2>
             <div className="contact-detail">
               <span className="contact-detail-label">Phone</span>
-              <div className="contact-detail-value">(617) 555-0198</div>
+              <div className="contact-detail-value">(781) 690-2612</div>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Email</span>
@@ -786,13 +792,9 @@ export default function Home() {
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Hours</span>
-              <div className="contact-detail-value">
-                Mon – Sat: 7am – 7pm
-                <br />
-                Sunday: By appointment
-              </div>
+              <div className="contact-detail-value">24 / 7 by Appointment</div>
             </div>
-            <div className="social-links">
+            {/* <div className="social-links">
               <a href="#" className="social-link" aria-label="Instagram">
                 IG
               </a>
@@ -802,14 +804,14 @@ export default function Home() {
               <a href="#" className="social-link" aria-label="TikTok">
                 TK
               </a>
-            </div>
+            </div> */}
           </div>
 
           {/* Form side */}
           <div id="quote">
-            <span className="section-label">Free Estimate</span>
+            <span className="section-label">Get a Quote</span>
             <h2 className="section-title" style={{ marginBottom: 32 }}>
-              Request a Quote
+              Request a Free Estimate
             </h2>
 
             {submitted ? (
@@ -831,7 +833,7 @@ export default function Home() {
                     id="name"
                     name="name"
                     className="form-control"
-                    placeholder="Jane Smith"
+                    placeholder="DJ"
                     value={form.name}
                     onChange={handleChange}
                     required
@@ -845,7 +847,7 @@ export default function Home() {
                     id="phone"
                     name="phone"
                     className="form-control"
-                    placeholder="(617) 555-0000"
+                    placeholder="(781) 690-2612"
                     value={form.phone}
                     onChange={handleChange}
                   />
@@ -859,13 +861,13 @@ export default function Home() {
                     name="email"
                     type="email"
                     className="form-control"
-                    placeholder="jane@example.com"
+                    placeholder="dj@djsdetailing.com"
                     value={form.email}
                     onChange={handleChange}
                     required
                   />
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label className="form-label" htmlFor="vehicleType">
                     Vehicle Type
                   </label>
@@ -903,16 +905,16 @@ export default function Home() {
                       </option>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 <div className="form-group full">
                   <label className="form-label" htmlFor="message">
-                    Additional Notes
+                    Service Requests
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     className="form-control"
-                    placeholder="Year, make, model? Any specific concerns? Preferred date/time?"
+                    placeholder="Whatever you need, DJ's got you covered..."
                     value={form.message}
                     onChange={handleChange}
                   />
@@ -937,8 +939,7 @@ export default function Home() {
           <span>DJ</span> &apos;s DETAILING
         </div>
         <p className="footer-copy">
-          © {new Date().getFullYear()} DJ&apos;s Detailing. All rights reserved.
-          Greater Boston, MA.
+          © {new Date().getFullYear()} DJ&apos;s Detailing. All rights reserved.{" "}
         </p>
       </footer>
     </>
