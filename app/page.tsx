@@ -16,8 +16,6 @@ interface QuoteForm {
   name: string;
   email: string;
   phone: string;
-  vehicleType: string;
-  service: string;
   message: string;
 }
 
@@ -47,27 +45,6 @@ const beforeAfterData: BeforeAfter[] = [
   //     "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80",
   //   description: "Degreased, cleaned, and protected every component.",
   // },
-];
-
-const services = [
-  "Express Wash & Vacuum",
-  "Full Interior Detail",
-  "Exterior Paint Correction",
-  "Ceramic Coating",
-  "Engine Bay Clean",
-  "Full-Day Concours Detail",
-  "Other / Not Sure",
-];
-
-const vehicleTypes = [
-  "Sedan",
-  "SUV / Crossover",
-  "Truck",
-  "Coupe",
-  "Sports / Exotic",
-  "Van / Minivan",
-  "Motorcycle",
-  "Boat / RV",
 ];
 
 // ─── Components ───────────────────────────────────────────────────────────────
@@ -113,8 +90,6 @@ export default function Home() {
     name: "",
     email: "",
     phone: "",
-    vehicleType: "",
-    service: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -127,10 +102,35 @@ export default function Home() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.service) return;
-    setSubmitted(true);
+
+    try {
+      // console.log("Submitting form:", form);
+      const response = await fetch("/api/quote-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      setSubmitted(true);
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    }
   };
 
   return (
@@ -568,7 +568,7 @@ export default function Home() {
       {/* ── Nav ── */}
       <nav className="nav">
         <a href="#" className="nav-logo">
-          <span>DJ</span> &apos;s DETAILING
+          <span>DJ</span> &apos;s DETAILS
         </a>
         <ul className="nav-links">
           <li>
@@ -608,15 +608,16 @@ export default function Home() {
             AGAIN.
           </h1>
           <p className="hero-sub">
-            Professional detailing that treats your vehicle like it deserves—
-            obsessive craftsmanship, premium products, zero shortcuts.
+            High-quality detailing from a local high school senior who genuinely
+            cares about your car. Attention to detail, premium products, and
+            results you’ll notice immediately.
           </p>
           <div className="hero-ctas">
             <a href="#quote" className="btn-primary">
               Request a Quote
             </a>
             <a href="#portfolio" className="btn-outline">
-              See Our Work
+              Check Out My Portfolio
             </a>
           </div>
         </div>
@@ -625,10 +626,13 @@ export default function Home() {
       {/* ── Stats strip ── */}
       <div className="stats">
         {[
-          { num: "FOUNDER LED", label: "Every Job Personally Handled" },
+          { num: "1-on-1 Service", label: "Handled Personally by DJ" },
           { num: "5★", label: "Average Rating" },
           { num: "100%", label: "Satisfaction Guaranteed" },
-          { num: "Local Business", label: "Using Professional Equipment" },
+          {
+            num: "Local & Student-Owned",
+            label: "Professional Tools & Products",
+          },
         ].map((s) => (
           <div key={s.label}>
             <span className="stat-num">{s.num}</span>
@@ -656,7 +660,7 @@ export default function Home() {
           <div className="about-img-wrap">
             <Image
               src="/images/profile.jpg"
-              alt="DJ — founder of DJ's Detailing"
+              alt="DJ — founder of DJ's Details"
               className="about-img"
               height={2000}
               width={2000}
@@ -673,27 +677,20 @@ export default function Home() {
               they open the door.&quot;
             </blockquote>
             <p className="about-body">
-              DJ, a.k.a. <span className="gold">Dillan J. Akinc</span>, is a
-              resident of Needham, MA and is a recent graduate of the Roxbury
-              Latin School. Next year, he is committed to play Varsity Soccer at
-              Union College. Dillan grew up restoring classic cars in his
-              father&apos;s garage, where he learned that the difference between
-              good and great is patience and product knowledge. After gaining
-              experience by detailing for friends and family who couldn&apos;t
-              stop raving about his work, he turned that passion into a
-              full-time craft.
+              DJ (Dillan Akinc) is a Needham-based high school senior who turned
+              a passion for cars into a growing local business. What started as
+              helping out friends and family quickly became something bigger
+              once people saw the level of care he puts into every detail.
             </p>
             <p className="about-body">
-              Today, DJ&apos;s Detailing brings that same hands-on obsession to
-              every vehicle — from daily drivers to weekend exotics. DJ
-              personally handles every job, so you always get his best work, not
-              an inexperienced crew.
+              He learned early on—working on cars with his dad—that great
+              results come from patience, the right products, and not cutting
+              corners. That mindset still drives every job he takes on today.
             </p>
             <p className="about-body">
-              His vision: build a detailing business where quality is
-              non-negotiable and every client feels like a VIP. No franchise
-              corners cut — just one skilled craftsman, premium products, and a
-              relentless standard.
+              When you book with DJ’s Details, you’re not getting a random
+              crew—you’re getting DJ himself. He takes pride in every car he
+              works on and treats it like it’s his own.
             </p>
             <div className="about-values">
               {[
@@ -718,38 +715,38 @@ export default function Home() {
       {/* ── Services ── */}
       <section id="services">
         <span className="section-label">Services</span>
-        <h2 className="section-title">What We Offer</h2>
+        <h2 className="section-title">What I Offer</h2>
         <div className="services-grid">
           {[
             {
               icon: "🚿",
               name: "Express Detail",
-              desc: "Quick exterior wash, vacuum, and wipe-down. Perfect for maintenance.",
+              desc: "A quick refresh to keep your car looking clean between deeper details.",
             },
             {
               icon: "✨",
               name: "Full Interior",
-              desc: "Deep extraction, leather/vinyl conditioning, deodorize, and full wipe-down.",
+              desc: "A full interior reset—seats, carpets, and surfaces cleaned and refreshed.",
             },
             {
               icon: "🎨",
               name: "Paint Correction",
-              desc: "Single or multi-stage machine polish to remove swirls and scratches.",
+              desc: "Removes swirls and light scratches to bring your paint back to life.",
             },
             {
               icon: "💎",
               name: "Ceramic Coating",
-              desc: "Long-lasting nano-ceramic protection — hydrophobic and glossy for years.",
+              desc: "Long-lasting protection that keeps your car glossy and easier to clean.",
             },
             {
               icon: "⚙️",
               name: "Engine Bay",
-              desc: "Safe degreasing, detailing, and dressing for a showroom engine bay.",
+              desc: "Careful cleaning to make your engine bay look clean and well-kept.",
             },
             {
               icon: "🏆",
               name: "Concours Full Detail",
-              desc: "The full treatment — every surface inside and out, from roof to wheel wells.",
+              desc: "The complete package—inside and out, detailed with maximum attention.",
             },
           ].map((s) => (
             <div key={s.name} className="service-item">
@@ -768,11 +765,11 @@ export default function Home() {
         <div className="contact-inner">
           {/* Info side */}
           <div className="contact-info">
-            <span className="section-label">Contact Us</span>
+            <span className="section-label">Contact Me</span>
             <h2 className="section-title" style={{ marginBottom: 40 }}>
-              Let&apos;s Talk
+              Let’s Talk About
               <br />
-              About Your Car.
+              Your Car.
             </h2>
             <div className="contact-detail">
               <span className="contact-detail-label">Phone</span>
@@ -780,7 +777,7 @@ export default function Home() {
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Email</span>
-              <div className="contact-detail-value">dj@djsdetailing.com</div>
+              <div className="contact-detail-value">dj@djsdetails.com</div>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Service Area</span>
@@ -819,12 +816,15 @@ export default function Home() {
                 <div className="success-icon">✅</div>
                 <div className="success-title">Quote Request Sent!</div>
                 <p className="success-sub">
-                  DJ will be in touch within 24 hours to discuss your vehicle
-                  and pricing.
+                  DJ will personally reach out within 24 hours to talk through
+                  your car and what you’re looking for.
                 </p>
               </div>
             ) : (
-              <div className="form-grid">
+              <form
+                className="grid gap-4 md:grid-cols-2"
+                onSubmit={handleSubmit}
+              >
                 <div className="form-group">
                   <label className="form-label" htmlFor="name">
                     Full Name *
@@ -861,51 +861,12 @@ export default function Home() {
                     name="email"
                     type="email"
                     className="form-control"
-                    placeholder="dj@djsdetailing.com"
+                    placeholder="dj@djsdetails.com"
                     value={form.email}
                     onChange={handleChange}
                     required
                   />
                 </div>
-                {/* <div className="form-group">
-                  <label className="form-label" htmlFor="vehicleType">
-                    Vehicle Type
-                  </label>
-                  <select
-                    id="vehicleType"
-                    name="vehicleType"
-                    className="form-control"
-                    value={form.vehicleType}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select type…</option>
-                    {vehicleTypes.map((v) => (
-                      <option key={v} value={v}>
-                        {v}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="service">
-                    Service Interested In *
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className="form-control"
-                    value={form.service}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select service…</option>
-                    {services.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div> */}
                 <div className="form-group full">
                   <label className="form-label" htmlFor="message">
                     Service Requests
@@ -914,20 +875,17 @@ export default function Home() {
                     id="message"
                     name="message"
                     className="form-control"
-                    placeholder="Whatever you need, DJ's got you covered..."
+                    placeholder="Tell me about your car and what you’re looking to get done…"
                     value={form.message}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="form-group full">
-                  <button
-                    className="btn-primary form-submit"
-                    onClick={handleSubmit}
-                  >
+                  <button className="btn-primary form-submit" type="submit">
                     Send Quote Request →
                   </button>
                 </div>
-              </div>
+              </form>
             )}
           </div>
         </div>
@@ -936,10 +894,10 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer>
         <div className="footer-logo">
-          <span>DJ</span> &apos;s DETAILING
+          <span>DJ</span> &apos;s DETAILS
         </div>
         <p className="footer-copy">
-          © {new Date().getFullYear()} DJ&apos;s Detailing. All rights reserved.{" "}
+          © {new Date().getFullYear()} DJ&apos;s Details. All rights reserved.{" "}
         </p>
       </footer>
     </>

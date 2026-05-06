@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DJ's Detailing",
+  title: "DJ's Details",
   description:
     "The best mobile auto detailing service in the Greater Boston area. We come to you, so you can spend more time doing what you love.",
 };
