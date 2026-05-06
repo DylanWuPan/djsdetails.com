@@ -777,7 +777,9 @@ export default function Home() {
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Email</span>
-              <div className="contact-detail-value">dj@djsdetails.com</div>
+              <div className="contact-detail-value">
+                djsdetailsbusiness@gmail.com
+              </div>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Service Area</span>
@@ -861,7 +863,7 @@ export default function Home() {
                     name="email"
                     type="email"
                     className="form-control"
-                    placeholder="dj@djsdetails.com"
+                    placeholder="djsdetailsbusiness@gmail.com"
                     value={form.email}
                     onChange={handleChange}
                     required
