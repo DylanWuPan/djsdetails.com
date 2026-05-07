@@ -668,7 +668,7 @@ export default function Home() {
         <div className="about-inner">
           <div className="about-img-wrap">
             <Image
-              src="/images/profile.jpg"
+              src="/images/profile-real.jpg"
               alt="DJ — founder of DJ's Details"
               className="about-img"
               height={2000}
