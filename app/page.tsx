@@ -681,7 +681,7 @@ export default function Home() {
               Meet <span className="gold">DJ</span>
             </h2>
             <blockquote className="about-quote">
-              &quot;A clean car isn &apos;t just about looks — it&apos;s about
+              &quot;A clean car isn&apos;t just about looks — it&apos;s about
               pride of ownership. I want every client to feel that the moment
               they open the door.&quot;
             </blockquote>
