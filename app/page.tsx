@@ -26,25 +26,34 @@ const beforeAfterData: BeforeAfter[] = [
     label: "Full Interior Restoration",
     before: "/images/before-after/audiinterior-before.jpg",
     after: "/images/before-after/audiinterior-after.jpg",
-    description: "Deep-cleaned seats, sanitized surfaces, and restored trim.",
+    description:
+      "Leather, carpets, and trim fully restored with a deep interior reset that brought the cabin back to life.",
   },
+
   {
     id: 2,
-    label: "Paint Correction & Ceramic Coat",
-    before: "/images/before-after/rangerover-before.jpg",
-    after: "/images/before-after/rangerover-after.jpg",
+    label: "Full Exterior Detail",
+    before: "/images/before-after/lexusexterior-before.jpeg",
+    after: "/images/before-after/lexusexterior-after.jpeg",
     description:
-      "Multi-stage polish removed swirls; ceramic coat locked in the gloss.",
+      "Foam washed, decontaminated, and finished with a deep gloss that completely refreshed the exterior.",
   },
-  // {
-  //   id: 3,
-  //   label: "Wheel & Engine Bay Detail",
-  //   before:
-  //     "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&q=80",
-  //   after:
-  //     "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80",
-  //   description: "Degreased, cleaned, and protected every component.",
-  // },
+  {
+    id: 3,
+    label: "Deep Interior Cleaning",
+    before: "/images/before-after/lexusinterior-before.jpeg",
+    after: "/images/before-after/lexusinterior-after.jpeg",
+    description:
+      "Heavy dirt, stains, and buildup removed to leave the interior looking factory fresh again.",
+  },
+  {
+    id: 4,
+    label: "Exterior Foam Wash",
+    before: "/images/foam-wash.jpeg",
+    after: "/images/porsche-wings.jpeg",
+    description:
+      "Thick foam treatment and careful hand washing delivered a clean, streak-free finish with standout shine.",
+  },
 ];
 
 // ─── Components ───────────────────────────────────────────────────────────────
