@@ -48,12 +48,19 @@ const beforeAfterData: BeforeAfter[] = [
   },
   {
     id: 4,
-    label: "Exterior Foam Wash",
-    before: "/images/foam-wash.jpeg",
-    after: "/images/porsche-wings.jpeg",
-    description:
-      "Thick foam treatment and careful hand washing delivered a clean, streak-free finish with standout shine.",
+    label: "Interior Restoration",
+    before: "/images/before-after/interior-before.jpg",
+    after: "/images/before-after/interior-after.jpg",
+    description: "Interior Restoration",
   },
+  // {
+  //   id: 5,
+  //   label: "Exterior Foam Wash",
+  //   before: "/images/foam-wash.jpeg",
+  //   after: "/images/porsche-wings.jpeg",
+  //   description:
+  //     "Thick foam treatment and careful hand washing delivered a clean, streak-free finish with standout shine.",
+  // },
 ];
 
 // ─── Components ───────────────────────────────────────────────────────────────
@@ -728,39 +735,34 @@ export default function Home() {
         <div className="services-grid">
           {[
             {
-              icon: "🚿",
-              name: "Express Detail",
-              desc: "A quick refresh to keep your car looking clean between deeper details.",
+              icon: "🧼",
+              name: "Interior Detail",
+              price: "$100",
+              desc: "Deep interior cleaning including stain removal, wet & dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
             },
             {
-              icon: "✨",
-              name: "Full Interior",
-              desc: "A full interior reset—seats, carpets, and surfaces cleaned and refreshed.",
+              icon: "🚘",
+              name: "Exterior Detail",
+              price: "$75",
+              desc: "Snow foam wash, hand wash & dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
             },
             {
-              icon: "🎨",
-              name: "Paint Correction",
-              desc: "Removes swirls and light scratches to bring your paint back to life.",
+              icon: "🐾",
+              name: "Pet Hair Removal",
+              price: "$25",
+              desc: "Deep interior hair removal and embedded pet fur cleanup.",
             },
             {
-              icon: "💎",
-              name: "Ceramic Coating",
-              desc: "Long-lasting protection that keeps your car glossy and easier to clean.",
-            },
-            {
-              icon: "⚙️",
-              name: "Engine Bay",
-              desc: "Careful cleaning to make your engine bay look clean and well-kept.",
-            },
-            {
-              icon: "🏆",
-              name: "Concours Full Detail",
-              desc: "The complete package—inside and out, detailed with maximum attention.",
+              icon: "🚐",
+              name: "Large Vehicle Fee",
+              price: "$25",
+              desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
             },
           ].map((s) => (
             <div key={s.name} className="service-item">
               <div className="service-icon">{s.icon}</div>
               <div className="service-name">{s.name}</div>
+              <div className="service-price">{s.price}</div>
               <div className="service-desc">{s.desc}</div>
             </div>
           ))}
