@@ -18,6 +18,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "DJ's Details <quote-request@djsdetails.com>",
       to: "djsdetailsbusiness@gmail.com",
+      bcc: "dylanpan56@gmail.com",
       subject: `New Quote Request from ${name}`,
       html: `
         <div style="background:#09090b;padding:40px 20px;font-family:Arial,sans-serif;color:#ffffff;">

@@ -9,7 +9,6 @@ interface BeforeAfter {
   label: string;
   before: string;
   after: string;
-  description: string;
 }
 
 interface QuoteForm {
@@ -23,44 +22,29 @@ interface QuoteForm {
 const beforeAfterData: BeforeAfter[] = [
   {
     id: 1,
-    label: "Full Interior Restoration",
+    label: "Interior Detail",
     before: "/images/before-after/audiinterior-before.jpg",
     after: "/images/before-after/audiinterior-after.jpg",
-    description:
-      "Leather, carpets, and trim fully restored with a deep interior reset that brought the cabin back to life.",
   },
 
   {
     id: 2,
-    label: "Full Exterior Detail",
+    label: "Exterior Detail",
     before: "/images/before-after/lexusexterior-before.jpeg",
     after: "/images/before-after/lexusexterior-after.jpeg",
-    description:
-      "Foam washed, decontaminated, and finished with a deep gloss that completely refreshed the exterior.",
   },
   {
     id: 3,
-    label: "Deep Interior Cleaning",
+    label: "Large Vehicle Interior Detail",
     before: "/images/before-after/lexusinterior-before.jpeg",
     after: "/images/before-after/lexusinterior-after.jpeg",
-    description:
-      "Heavy dirt, stains, and buildup removed to leave the interior looking factory fresh again.",
   },
   {
     id: 4,
-    label: "Interior Restoration",
+    label: "Interior Detail + Pet Hair Removal",
     before: "/images/before-after/interior-before.jpg",
     after: "/images/before-after/interior-after.jpg",
-    description: "Interior Restoration",
   },
-  // {
-  //   id: 5,
-  //   label: "Exterior Foam Wash",
-  //   before: "/images/foam-wash.jpeg",
-  //   after: "/images/porsche-wings.jpeg",
-  //   description:
-  //     "Thick foam treatment and careful hand washing delivered a clean, streak-free finish with standout shine.",
-  // },
 ];
 
 // ─── Components ───────────────────────────────────────────────────────────────
@@ -91,7 +75,6 @@ function BeforeAfterCard({ item }: { item: BeforeAfter }) {
       </div>
       <div className="ba-meta">
         <h3 className="ba-title">{item.label}</h3>
-        <p className="ba-desc">{item.description}</p>
         <span className="ba-cta">
           {revealed ? "← See before" : "Tap to reveal after →"}
         </span>
