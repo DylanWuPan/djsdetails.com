@@ -287,6 +287,13 @@ export default function Home() {
 
         /* ── Sections ── */
         section { padding: 100px 48px; }
+        #portfolio,
+        #about,
+        #contact {
+          max-width: 1240px;
+          margin: 0 auto;
+          width: 100%;
+        }
         .section-label {
           font-size: .72rem;
           letter-spacing: .2em;
@@ -313,7 +320,7 @@ export default function Home() {
 
         /* ── Stats strip ── */
         .stats {
-          background: var(--carbon);
+          background: linear-gradient(180deg, rgba(28,28,30,.98), rgba(17,17,17,.98));
           border-top: 1px solid var(--line);
           border-bottom: 1px solid var(--line);
           padding: 40px 48px;
@@ -324,7 +331,7 @@ export default function Home() {
         }
         .stat-num {
           font-family: var(--font-display);
-          font-size: 3rem;
+          font-size: clamp(2rem, 4vw, 3rem);
           color: var(--gold);
           display: block;
           line-height: 1;
@@ -434,21 +441,92 @@ export default function Home() {
         }
 
         /* ── Services list ── */
+        .services-section {
+          position: relative;
+          min-height: 700px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          isolation: isolate;
+          background:
+            linear-gradient(90deg, var(--black) 0%, var(--black) 44%, rgba(10,10,10,.8) 64%, var(--black) 100%);
+        }
+        .services-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            linear-gradient(90deg, var(--black) 0%, rgba(10,10,10,.98) 45%, rgba(10,10,10,.35) 67%, var(--black) 100%),
+            linear-gradient(180deg, var(--black) 0%, rgba(10,10,10,0) 18%, rgba(10,10,10,0) 82%, var(--black) 100%);
+          z-index: 1;
+        }
+        .services-section::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 74% 48%, rgba(232,201,106,.18), transparent 34%);
+          mix-blend-mode: screen;
+          opacity: .8;
+          z-index: 2;
+        }
+        .services-photo {
+          position: absolute;
+          right: max(48px, calc((100vw - 1240px) / 2));
+          top: 55%;
+          height: min(75vh);
+          aspect-ratio: 3 / 4;
+          transform: translateY(-50%);
+          border-radius: 16px;
+          border: 1px solid rgba(201,168,76,.28);
+          box-shadow: 0 28px 90px rgba(0,0,0,.42);
+          overflow: hidden;
+          opacity: .95;
+          z-index: 0;
+        }
+        .services-photo::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/images/foam-wash.jpeg') center/cover no-repeat;
+          border-radius: inherit;
+          filter: saturate(1.08) contrast(1.04);
+        }
+        .services-inner {
+          position: relative;
+          z-index: 3;
+          width: min(100%, 1160px);
+          margin: 0 auto;
+        }
+        .services-heading {
+          max-width: 560px;
+        }
         .services-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 2px;
+          grid-template-columns: repeat(2, minmax(240px, 1fr));
+          gap: 14px;
+          width: min(100%, 760px);
         }
         .service-item {
-          background: var(--carbon);
-          border: 1px solid var(--line);
-          padding: 32px 28px;
-          transition: background .2s, border-color .2s;
+          background: rgba(15,15,16,.84);
+          border: 1px solid rgba(201,168,76,.2);
+          border-radius: 8px;
+          padding: 30px 28px;
+          min-height: 228px;
+          box-shadow: 0 18px 50px rgba(0,0,0,.24);
+          backdrop-filter: blur(12px);
+          transition: background .2s, border-color .2s, transform .2s var(--ease);
         }
-        .service-item:hover { background: var(--mid); border-color: var(--gold); }
+        .service-item:hover { background: rgba(28,28,30,.92); border-color: rgba(201,168,76,.7); transform: translateY(-3px); }
         .service-icon { font-size: 1.6rem; margin-bottom: 14px; }
-        .service-name { font-family: var(--font-display); font-size: 1.15rem; letter-spacing: .04em; margin-bottom: 8px; }
-        .service-desc { font-size: .83rem; color: var(--muted); }
+        .service-name { font-family: var(--font-display); font-size: 1.25rem; letter-spacing: .04em; margin-bottom: 8px; }
+        .service-price {
+          font-family: var(--font-display);
+          font-size: 2rem;
+          line-height: 1;
+          color: var(--gold);
+          margin-bottom: 16px;
+        }
+        .service-desc { font-size: .86rem; color: var(--silver); }
 
         /* ── Contact split ── */
         .contact-inner {
@@ -504,11 +582,15 @@ export default function Home() {
           padding: 12px 16px;
           border-radius: 6px;
           outline: none;
-          transition: border-color .2s;
+          transition: border-color .2s, background .2s, box-shadow .2s;
           appearance: none;
           -webkit-appearance: none;
         }
-        .form-control:focus { border-color: var(--gold); }
+        .form-control:focus {
+          border-color: var(--gold);
+          background: rgba(28,28,30,.9);
+          box-shadow: 0 0 0 3px rgba(201,168,76,.12);
+        }
         .form-control::placeholder { color: var(--muted); }
         textarea.form-control { resize: vertical; min-height: 120px; }
         select.form-control option { background: var(--carbon); }
@@ -557,6 +639,32 @@ export default function Home() {
           .contact-inner { grid-template-columns: 1fr; gap: 40px; }
           .about-img-wrap::after { display: none; }
           .about-img { aspect-ratio: 4/3; }
+          .services-section {
+            min-height: auto;
+            background: var(--black);
+          }
+          .services-section::before {
+            background:
+              linear-gradient(180deg, rgba(10,10,10,.3) 0%, var(--black) 320px, var(--black) 100%);
+          }
+          .services-section::after { opacity: .42; }
+          .services-photo {
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: none;
+            height: 340px;
+            aspect-ratio: auto;
+            transform: none;
+            border-radius: 0 0 16px 16px;
+            opacity: .58;
+          }
+          .services-photo::before {
+            background-position: center top;
+            background-size: min(100%, 640px) auto;
+          }
+          .services-grid { grid-template-columns: 1fr; width: 100%; }
+          .service-item { min-height: 0; padding: 28px 24px; }
           .form-grid { grid-template-columns: 1fr; }
           .form-group.full { grid-column: 1; }
           footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
@@ -629,8 +737,8 @@ export default function Home() {
           { num: "5★", label: "Average Rating" },
           { num: "100%", label: "Satisfaction Guaranteed" },
           {
-            num: "Local & Student-Owned",
-            label: "Professional Tools & Products",
+            num: "Student-Run",
+            label: "Local Business",
           },
         ].map((s) => (
           <div key={s.label}>
@@ -712,43 +820,48 @@ export default function Home() {
       <div className="divider" />
 
       {/* ── Services ── */}
-      <section id="services">
-        <span className="section-label">Services</span>
-        <h2 className="section-title">What I Offer</h2>
-        <div className="services-grid">
-          {[
-            {
-              icon: "🧼",
-              name: "Interior Detail",
-              price: "$100",
-              desc: "Deep interior cleaning including stain removal, wet & dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
-            },
-            {
-              icon: "🚘",
-              name: "Exterior Detail",
-              price: "$75",
-              desc: "Snow foam wash, hand wash & dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
-            },
-            {
-              icon: "🐾",
-              name: "Pet Hair Removal",
-              price: "$25",
-              desc: "Deep interior hair removal and embedded pet fur cleanup.",
-            },
-            {
-              icon: "🚐",
-              name: "Large Vehicle Fee",
-              price: "$25",
-              desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
-            },
-          ].map((s) => (
-            <div key={s.name} className="service-item">
-              <div className="service-icon">{s.icon}</div>
-              <div className="service-name">{s.name}</div>
-              <div className="service-price">{s.price}</div>
-              <div className="service-desc">{s.desc}</div>
-            </div>
-          ))}
+      <section id="services" className="services-section">
+        <div className="services-photo" aria-hidden="true" />
+        <div className="services-inner">
+          <div className="services-heading">
+            <span className="section-label">Services</span>
+            <h2 className="section-title">What I Offer</h2>
+          </div>
+          <div className="services-grid">
+            {[
+              {
+                icon: "💺",
+                name: "Interior Detail",
+                price: "$100",
+                desc: "Deep interior cleaning including stain removal, wet & dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
+              },
+              {
+                icon: "🧼",
+                name: "Exterior Detail",
+                price: "$75",
+                desc: "Snow foam wash, hand wash & dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
+              },
+              {
+                icon: "🐾",
+                name: "Pet Hair Removal",
+                price: "$25",
+                desc: "Deep interior hair removal and embedded pet fur cleanup.",
+              },
+              {
+                icon: "🚙",
+                name: "Large Vehicle Fee",
+                price: "$25",
+                desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
+              },
+            ].map((s) => (
+              <div key={s.name} className="service-item">
+                <div className="service-icon">{s.icon}</div>
+                <div className="service-name">{s.name}</div>
+                <div className="service-price">{s.price}</div>
+                <div className="service-desc">{s.desc}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -809,7 +922,6 @@ export default function Home() {
 
             {submitted ? (
               <div className="success-msg">
-                <div className="success-icon">✅</div>
                 <div className="success-title">Quote Request Sent!</div>
                 <p className="success-sub">
                   DJ will personally reach out within 24 hours to talk through
@@ -817,10 +929,7 @@ export default function Home() {
                 </p>
               </div>
             ) : (
-              <form
-                className="grid gap-4 md:grid-cols-2"
-                onSubmit={handleSubmit}
-              >
+              <form className="form-grid" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="name">
                     Full Name *
