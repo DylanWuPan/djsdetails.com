@@ -660,7 +660,7 @@ export default function Home() {
             opacity: .58;
           }
           .services-photo::before {
-            background-position: center top;
+            background-position: center center;
             background-size: min(100%, 640px) auto;
           }
           .services-grid { grid-template-columns: 1fr; width: 100%; }
