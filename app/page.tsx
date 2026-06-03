@@ -1,7 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import BeforeAfterCard from "./components/BeforeAfterCard";
+import QuoteForm from "./components/QuoteForm";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface BeforeAfter {
@@ -11,14 +10,29 @@ interface BeforeAfter {
   after: string;
 }
 
-interface QuoteForm {
+interface Service {
+  icon: string;
   name: string;
-  email: string;
-  phone: string;
-  message: string;
+  price: string;
+  desc: string;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
+const siteUrl = "https://djsdetails.com";
+const businessName = "DJ's Details";
+const phone = "+17816902612";
+const displayPhone = "(781) 690-2612";
+const email = "djsdetailsbusiness@gmail.com";
+const serviceArea = [
+  "Needham",
+  "Newton",
+  "Wellesley",
+  "Dedham",
+  "Westwood",
+  "Brookline",
+  "Greater Boston",
+];
+
 const beforeAfterData: BeforeAfter[] = [
   {
     id: 1,
@@ -53,93 +67,149 @@ const beforeAfterData: BeforeAfter[] = [
   },
 ];
 
-// ─── Components ───────────────────────────────────────────────────────────────
+const services: Service[] = [
+  {
+    icon: "💺",
+    name: "Interior Detail",
+    price: "$100",
+    desc: "Deep interior cleaning including stain removal, wet and dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
+  },
+  {
+    icon: "🧼",
+    name: "Exterior Detail",
+    price: "$75",
+    desc: "Snow foam wash, hand wash and dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
+  },
+  {
+    icon: "🐾",
+    name: "Pet Hair Removal",
+    price: "$25",
+    desc: "Deep interior hair removal and embedded pet fur cleanup.",
+  },
+  {
+    icon: "🚙",
+    name: "Large Vehicle Fee",
+    price: "$25",
+    desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
+  },
+];
 
-function BeforeAfterCard({ item }: { item: BeforeAfter }) {
-  const [revealed, setRevealed] = useState(false);
+const faqs = [
+  {
+    question: "Does DJ's Details come to my home or office?",
+    answer:
+      "Yes. DJ's Details is a mobile auto detailing service for Needham and the Greater Boston area. DJ can detail your car at your home, driveway, or another appointment location when conditions allow.",
+  },
+  {
+    question: "What areas does DJ's Details serve?",
+    answer:
+      "DJ's Details is based in Needham, Massachusetts and serves nearby Greater Boston communities including Newton, Wellesley, Dedham, Westwood, Brookline, and surrounding towns by appointment.",
+  },
+  {
+    question: "How much does mobile car detailing cost?",
+    answer:
+      "Interior details start at $100, exterior details start at $75, pet hair removal is $25, and large vehicles such as 3-row SUVs, vans, and trucks add $25.",
+  },
+  {
+    question: "Who performs the detail?",
+    answer:
+      "Every appointment is handled personally by DJ, the founder of DJ's Details, so clients get consistent one-on-one service.",
+  },
+];
 
-  return (
-    <div className="ba-card" onClick={() => setRevealed((r) => !r)}>
-      <div className={`ba-slider ${revealed ? "revealed" : ""}`}>
-        <Image
-          src={item.before}
-          alt={`Before – ${item.label}`}
-          className="ba-img ba-before"
-          height={2000}
-          width={2000}
-        />
-        <Image
-          src={item.after}
-          alt={`After – ${item.label}`}
-          className="ba-img ba-after"
-          height={2000}
-          width={2000}
-        />
-        <div className="ba-divider">
-          <span className="ba-pill">{revealed ? "AFTER" : "BEFORE"}</span>
-        </div>
-      </div>
-      <div className="ba-meta">
-        <h3 className="ba-title">{item.label}</h3>
-        <span className="ba-cta">
-          {revealed ? "← See before" : "Tap to reveal after →"}
-        </span>
-      </div>
-    </div>
-  );
-}
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": `${siteUrl}/#localbusiness`,
+      name: businessName,
+      url: siteUrl,
+      image: `${siteUrl}/images/hero.jpg`,
+      logo: `${siteUrl}/favicon.png`,
+      description:
+        "DJ's Details provides mobile interior and exterior auto detailing in Needham and the Greater Boston area.",
+      telephone: phone,
+      email,
+      priceRange: "$75-$150",
+      founder: {
+        "@type": "Person",
+        name: "Dillan Akinc",
+        alternateName: "DJ",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Needham",
+        addressRegion: "MA",
+        addressCountry: "US",
+      },
+      areaServed: serviceArea.map((name) => ({
+        "@type": "City",
+        name,
+      })),
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "00:00",
+          closes: "23:59",
+        },
+      ],
+      makesOffer: services.map((service) => ({
+        "@type": "Offer",
+        name: service.name,
+        price: service.price.replace("$", ""),
+        priceCurrency: "USD",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          description: service.desc,
+          serviceType: "Mobile auto detailing",
+          areaServed: "Greater Boston, MA",
+        },
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: businessName,
+      url: siteUrl,
+      inLanguage: "en-US",
+      publisher: {
+        "@id": `${siteUrl}/#localbusiness`,
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [form, setForm] = useState<QuoteForm>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      // console.log("Submitting form:", form);
-      const response = await fetch("/api/quote-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit");
-      }
-
-      setSubmitted(true);
-
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong.");
-    }
-  };
-
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <style>{`
         /* ── Fonts ── */
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
@@ -356,6 +426,11 @@ export default function Home() {
           border-radius: var(--radius);
           overflow: hidden;
           cursor: pointer;
+          color: inherit;
+          display: block;
+          font: inherit;
+          text-align: left;
+          width: 100%;
           transition: transform .25s var(--ease), box-shadow .25s;
         }
         .ba-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
@@ -391,7 +466,7 @@ export default function Home() {
           border-radius: 2px;
         }
         .ba-meta { padding: 20px 24px 24px; }
-        .ba-title { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .04em; margin-bottom: 6px; }
+        .ba-title { display: block; font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .04em; margin-bottom: 6px; }
         .ba-desc { font-size: .85rem; color: var(--muted); margin-bottom: 12px; }
         .ba-cta { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
 
@@ -551,7 +626,8 @@ export default function Home() {
           margin-bottom: 6px;
           display: block;
         }
-        .contact-detail-value { font-size: 1rem; color: var(--silver); }
+        .contact-detail-value { font-size: 1rem; color: var(--silver); text-decoration: none; }
+        a.contact-detail-value:hover { color: var(--gold); }
         .social-links { display: flex; gap: 16px; margin-top: 40px; }
         .social-link {
           width: 44px; height: 44px;
@@ -617,6 +693,36 @@ export default function Home() {
         .success-icon { font-size: 2.4rem; margin-bottom: 16px; }
         .success-title { font-family: var(--font-display); font-size: 2rem; letter-spacing: .04em; margin-bottom: 8px; }
         .success-sub { color: var(--muted); }
+
+        /* ── FAQ / Answer Engine Copy ── */
+        .faq-section {
+          max-width: 960px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        .faq-intro {
+          color: var(--silver);
+          margin: -28px 0 36px;
+          max-width: 720px;
+        }
+        .faq-list {
+          display: grid;
+          gap: 14px;
+        }
+        .faq-item {
+          border-top: 1px solid var(--line);
+          padding: 24px 0 8px;
+        }
+        .faq-question {
+          font-family: var(--font-display);
+          font-size: 1.35rem;
+          letter-spacing: .04em;
+          margin-bottom: 10px;
+        }
+        .faq-answer {
+          color: var(--muted);
+          font-size: .95rem;
+        }
 
         /* ── Footer ── */
         footer {
@@ -694,6 +800,9 @@ export default function Home() {
             <a href="#services">Services</a>
           </li>
           <li>
+            <a href="#faq">FAQ</a>
+          </li>
+          <li>
             <a href="#contact">Contact</a>
           </li>
         </ul>
@@ -711,19 +820,20 @@ export default function Home() {
         <div className="hero-bg" />
         <div className="hero-content">
           <span className="hero-badge">
-            Mobile &amp; On-Site Detailing · Boston Area
+            Mobile Auto Detailing · Needham &amp; Greater Boston
           </span>
           <h1 className="hero-title">
-            MAKE YOUR
+            MOBILE AUTO
             <br />
-            CAR <em>SHINE</em>
+            DETAILING
             <br />
-            AGAIN.
+            THAT <em>SHINES</em>.
           </h1>
           <p className="hero-sub">
-            High-quality detailing from a local high school senior who genuinely
-            cares about your car. Attention to detail, premium products, and
-            results you’ll notice immediately.
+            DJ&apos;s Details brings interior and exterior car detailing to your
+            driveway in Needham and Greater Boston. Get careful one-on-one
+            service, premium products, transparent pricing, and results you will
+            notice immediately.
           </p>
           <div className="hero-ctas">
             <a href="#quote" className="btn-primary">
@@ -740,7 +850,7 @@ export default function Home() {
       <div className="stats">
         {[
           { num: "1-on-1 Service", label: "Handled Personally by DJ" },
-          { num: "5★", label: "Average Rating" },
+          { num: "Free", label: "Estimates by Request" },
           { num: "100%", label: "Satisfaction Guaranteed" },
           {
             num: "Student-Run",
@@ -831,43 +941,42 @@ export default function Home() {
         <div className="services-inner">
           <div className="services-heading">
             <span className="section-label">Services</span>
-            <h2 className="section-title">What I Offer</h2>
+            <h2 className="section-title">Mobile Auto Detailing Services</h2>
           </div>
           <div className="services-grid">
-            {[
-              {
-                icon: "💺",
-                name: "Interior Detail",
-                price: "$100",
-                desc: "Deep interior cleaning including stain removal, wet & dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
-              },
-              {
-                icon: "🧼",
-                name: "Exterior Detail",
-                price: "$75",
-                desc: "Snow foam wash, hand wash & dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
-              },
-              {
-                icon: "🐾",
-                name: "Pet Hair Removal",
-                price: "$25",
-                desc: "Deep interior hair removal and embedded pet fur cleanup.",
-              },
-              {
-                icon: "🚙",
-                name: "Large Vehicle Fee",
-                price: "$25",
-                desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
-              },
-            ].map((s) => (
-              <div key={s.name} className="service-item">
+            {services.map((s) => (
+              <article key={s.name} className="service-item">
                 <div className="service-icon">{s.icon}</div>
-                <div className="service-name">{s.name}</div>
+                <h3 className="service-name">{s.name}</h3>
                 <div className="service-price">{s.price}</div>
-                <div className="service-desc">{s.desc}</div>
-              </div>
+                <p className="service-desc">{s.desc}</p>
+              </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <div className="divider" />
+
+      {/* ── FAQ ── */}
+      <section id="faq" className="faq-section">
+        <span className="section-label">FAQ</span>
+        <h2 className="section-title">
+          Mobile Detailing in Needham &amp; Greater Boston
+        </h2>
+        <p className="faq-intro">
+          DJ&apos;s Details is a Needham-based mobile car detailing business
+          serving Greater Boston by appointment. Interior details start at $100,
+          exterior details start at $75, and every vehicle is handled personally
+          by DJ.
+        </p>
+        <div className="faq-list">
+          {faqs.map((faq) => (
+            <article className="faq-item" key={faq.question}>
+              <h3 className="faq-question">{faq.question}</h3>
+              <p className="faq-answer">{faq.answer}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -886,17 +995,20 @@ export default function Home() {
             </h2>
             <div className="contact-detail">
               <span className="contact-detail-label">Phone</span>
-              <div className="contact-detail-value">(781) 690-2612</div>
+              <a className="contact-detail-value" href={`tel:${phone}`}>
+                {displayPhone}
+              </a>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Email</span>
-              <div className="contact-detail-value">
-                djsdetailsbusiness@gmail.com
-              </div>
+              <a className="contact-detail-value" href={`mailto:${email}`}>
+                {email}
+              </a>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Service Area</span>
               <div className="contact-detail-value">
+                Needham, Newton, Wellesley, Dedham, Westwood, Brookline,
                 Greater Boston, MA
                 <br />
                 Mobile &amp; On-Site Available
@@ -925,79 +1037,7 @@ export default function Home() {
             <h2 className="section-title" style={{ marginBottom: 32 }}>
               Request a Free Estimate
             </h2>
-
-            {submitted ? (
-              <div className="success-msg">
-                <div className="success-title">Quote Request Sent!</div>
-                <p className="success-sub">
-                  DJ will personally reach out within 24 hours to talk through
-                  your car and what you’re looking for.
-                </p>
-              </div>
-            ) : (
-              <form className="form-grid" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="name">
-                    Full Name *
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    className="form-control"
-                    placeholder="DJ"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="form-label" htmlFor="phone">
-                    Phone
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    className="form-control"
-                    placeholder="(781) 690-2612"
-                    value={form.phone}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group full">
-                  <label className="form-label" htmlFor="email">
-                    Email *
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className="form-control"
-                    placeholder="djsdetailsbusiness@gmail.com"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group full">
-                  <label className="form-label" htmlFor="message">
-                    Service Requests
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    className="form-control"
-                    placeholder="Tell me about your car and what you’re looking to get done…"
-                    value={form.message}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group full">
-                  <button className="btn-primary form-submit" type="submit">
-                    Send Quote Request →
-                  </button>
-                </div>
-              </form>
-            )}
+            <QuoteForm />
           </div>
         </div>
       </section>
