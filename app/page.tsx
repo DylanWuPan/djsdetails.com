@@ -1008,8 +1008,8 @@ export default function Home() {
             <div className="contact-detail">
               <span className="contact-detail-label">Service Area</span>
               <div className="contact-detail-value">
-                Needham, Newton, Wellesley, Dedham, Westwood, Brookline,
-                Greater Boston, MA
+                Needham, Newton, Wellesley, Dedham, Westwood, Brookline, Greater
+                Boston, MA
                 <br />
                 Mobile &amp; On-Site Available
               </div>
