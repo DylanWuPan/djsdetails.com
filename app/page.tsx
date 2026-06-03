@@ -22,28 +22,34 @@ interface QuoteForm {
 const beforeAfterData: BeforeAfter[] = [
   {
     id: 1,
-    label: "Interior Detail",
-    before: "/images/before-after/audiinterior-before.jpg",
-    after: "/images/before-after/audiinterior-after.jpg",
+    label: "Exterior Detail",
+    before: "/images/before-after/audi-exterior-before.jpg",
+    after: "/images/before-after/audi-exterior-after.jpg",
   },
-
   {
     id: 2,
-    label: "Exterior Detail",
-    before: "/images/before-after/lexusexterior-before.jpeg",
-    after: "/images/before-after/lexusexterior-after.jpeg",
-  },
-  {
-    id: 3,
     label: "Large Vehicle Interior Detail",
     before: "/images/before-after/lexusinterior-before.jpeg",
     after: "/images/before-after/lexusinterior-after.jpeg",
+  },
+  {
+    id: 3,
+
+    label: "Exterior Detail",
+    before: "/images/before-after/lexusexterior-before.jpeg",
+    after: "/images/before-after/lexusexterior-after.jpeg",
   },
   {
     id: 4,
     label: "Interior Detail + Pet Hair Removal",
     before: "/images/before-after/interior-before.jpg",
     after: "/images/before-after/interior-after.jpg",
+  },
+  {
+    id: 5,
+    label: "Interior Detail",
+    before: "/images/before-after/audiinterior-before.jpg",
+    after: "/images/before-after/audiinterior-after.jpg",
   },
 ];
 
