@@ -46,13 +46,13 @@ const beforeAfterData: BeforeAfter[] = [
     before: "/images/before-after/lexusinterior-before.jpeg",
     after: "/images/before-after/lexusinterior-after.jpeg",
   },
-  {
-    id: 3,
+  // {
+  //   id: 3,
 
-    label: "Exterior Detail",
-    before: "/images/before-after/lexusexterior-before.jpeg",
-    after: "/images/before-after/lexusexterior-after.jpeg",
-  },
+  //   label: "Exterior Detail",
+  //   before: "/images/before-after/lexusexterior-before.jpeg",
+  //   after: "/images/before-after/lexusexterior-after.jpeg",
+  // },
   {
     id: 4,
     label: "Interior Detail + Pet Hair Removal",
