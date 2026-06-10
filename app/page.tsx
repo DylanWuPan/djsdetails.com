@@ -69,29 +69,35 @@ const beforeAfterData: BeforeAfter[] = [
 
 const services: Service[] = [
   {
+    icon: "🏎️",
+    name: "Full Detail",
+    price: "$150",
+    desc: "Deep interior cleaning and a premieum exterior detail for a comprehensive refresh that makes your car look and feel like new.",
+  },
+  {
     icon: "💺",
     name: "Interior Detail",
-    price: "$100",
+    price: "$115",
     desc: "Deep interior cleaning including stain removal, wet and dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
   },
   {
     icon: "🧼",
     name: "Exterior Detail",
-    price: "$75",
+    price: "$50",
     desc: "Snow foam wash, hand wash and dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
   },
   {
-    icon: "🐾",
-    name: "Pet Hair Removal",
+    icon: "✨",
+    name: "Add-Ons",
     price: "$25",
-    desc: "Deep interior hair removal and embedded pet fur cleanup.",
+    desc: "Add on pet hair removal, large vehicle service, or other specialized requests to any detail for a personalized service that meets your car's unique needs.",
   },
-  {
-    icon: "🚙",
-    name: "Large Vehicle Fee",
-    price: "$25",
-    desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
-  },
+  // {
+  //   icon: "🚙",
+  //   name: "Large Vehicle Fee",
+  //   price: "$25",
+  //   desc: "Oversized vehicles including 3-row SUVs, vans, and trucks.",
+  // },
 ];
 
 const faqs = [
@@ -995,21 +1001,41 @@ export default function Home() {
             </h2>
             <div className="contact-detail">
               <span className="contact-detail-label">Phone</span>
-              <a className="contact-detail-value" href={`tel:${phone}`}>
+              <a
+                className="contact-detail-value"
+                href={`tel:${phone}`}
+                target="_blank"
+                rel="noopener"
+              >
                 {displayPhone}
               </a>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Email</span>
-              <a className="contact-detail-value" href={`mailto:${email}`}>
+              <a
+                className="contact-detail-value"
+                href={`mailto:${email}`}
+                target="_blank"
+                rel="noopener"
+              >
                 {email}
+              </a>
+            </div>
+            <div className="contact-detail">
+              <span className="contact-detail-label">Instagram</span>
+              <a
+                className="contact-detail-value"
+                href={`https://www.instagram.com/detailed_by_dj?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==`}
+                target="_blank"
+                rel="noopener"
+              >
+                @detailed_by_dj
               </a>
             </div>
             <div className="contact-detail">
               <span className="contact-detail-label">Service Area</span>
               <div className="contact-detail-value">
-                Needham, Newton, Wellesley, Dedham, Westwood, Brookline, Greater
-                Boston, MA
+                Greater Boston, MA
                 <br />
                 Mobile &amp; On-Site Available
               </div>
@@ -1018,17 +1044,6 @@ export default function Home() {
               <span className="contact-detail-label">Hours</span>
               <div className="contact-detail-value">24 / 7 by Appointment</div>
             </div>
-            {/* <div className="social-links">
-              <a href="#" className="social-link" aria-label="Instagram">
-                IG
-              </a>
-              <a href="#" className="social-link" aria-label="Facebook">
-                FB
-              </a>
-              <a href="#" className="social-link" aria-label="TikTok">
-                TK
-              </a>
-            </div> */}
           </div>
 
           {/* Form side */}
