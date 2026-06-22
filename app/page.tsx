@@ -77,19 +77,19 @@ const services: Service[] = [
   {
     icon: "💺",
     name: "Interior Detail",
-    price: "$115",
+    price: "$100",
     desc: "Deep interior cleaning including stain removal, wet and dry vacuuming, glass treatment, leather conditioning, plastic revival, and careful brush work using non-toxic products.",
   },
   {
     icon: "🧼",
     name: "Exterior Detail",
-    price: "$50",
+    price: "$60",
     desc: "Snow foam wash, hand wash and dry, tire and rim shine, glass treatment, and paint protection for a clean glossy finish.",
   },
   {
     icon: "✨",
     name: "Add-Ons",
-    price: "$25",
+    price: "$30",
     desc: "Add on pet hair removal, large vehicle service, or other specialized requests to any detail for a personalized service that meets your car's unique needs.",
   },
   // {
